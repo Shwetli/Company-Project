@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Employees</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Employees Dashboard</h1>
+
+    <div class="toolbar">
+      <button id="addBtn">Add</button>
+      <button id="searchBtn">Search</button>
+      <button id="clearBtn" class="secondary">Clear</button>
+      <button id="excelBtn" class="success">Excel</button>
+    </div>
+
+    <div class="filters grid">
+      <input type="text" id="nameFilter" placeholder="Full name contains...">
+      <input type="text" id="jobFilter" placeholder="Job title contains...">
+      <select id="departmentFilter"><option value="">All departments</option></select>
+      <input type="text" id="addressFilter" placeholder="Address contains...">
+      <select id="townFilter"><option value="">All towns</option></select>
+      <div class="salary-box">
+        <label>Salary range</label>
+        <div class="salary-inputs">
+          <input type="number" id="salaryMin" placeholder="From">
+          <input type="number" id="salaryMax" placeholder="To">
+        </div>
+        <div class="salary-sliders">
+          <input type="range" id="salaryMinRange">
+          <input type="range" id="salaryMaxRange">
+        </div>
+        <div class="salary-values"><span id="salaryMinText"></span> - <span id="salaryMaxText"></span></div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th data-sort="full_name">Full name</th>
+            <th data-sort="job_title">Job title</th>
+            <th data-sort="department_name">Department</th>
+            <th data-sort="salary">Salary</th>
+            <th data-sort="address_text">Address</th>
+            <th data-sort="town">Town</th>
+            <th>Projects</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="bottom-bar">
+      <div id="pageInfo">Page 1/1</div>
+      <div id="countInfo">Showing 0 of 0</div>
+      <div class="pager">
+        <button id="prevBtn" class="secondary">Prev</button>
+        <button id="nextBtn" class="secondary">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add employee</h2>
+        <button id="closeModal" class="icon-btn">✕</button>
+      </div>
+      <form id="employeeForm" class="form-grid">
+        <input type="hidden" id="employeeId">
+        <input type="text" id="firstName" placeholder="First name" required>
+        <input type="text" id="middleName" placeholder="Middle name">
+        <input type="text" id="lastName" placeholder="Last name" required>
+        <input type="text" id="jobTitle" placeholder="Job title" required>
+        <select id="departmentId" required><option value="">Select department</option></select>
+        <input type="number" step="0.01" id="salary" placeholder="Salary" required>
+        <input type="text" id="addressText" placeholder="Address" required>
+        <select id="townId" required><option value="">Select town</option></select>
+        <select id="projectIds" multiple size="6"></select>
+        <div class="full-row actions">
+          <button type="submit" class="success">Save</button>
+          <button type="button" id="cancelBtn" class="secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
